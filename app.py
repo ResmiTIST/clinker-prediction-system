@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import pickle
+from joblib import load
 import numpy as np
 from flask_cors import CORS
 import os
@@ -9,8 +9,7 @@ CORS(app)
 
 # Load trained model
 try:
-    with open('clinker_model.pkl', 'rb') as file:
-        model = pickle.load(file)
+    model = load('clinker_model.joblib')
     print("Model loaded successfully")
 except FileNotFoundError:
     print("Error: model file not found")
